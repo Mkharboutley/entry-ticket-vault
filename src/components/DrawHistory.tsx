@@ -8,24 +8,24 @@ const DrawHistory = () => {
   const recentWinners = [
     {
       id: 1,
-      prize: "iPhone 15 Pro",
-      winner: "M.J. from California",
+      prize: "آيفون ١٥ برو",
+      winner: "م.ج. من كاليفورنيا",
       date: "2024-06-01",
       entryCode: "DRAW202406-****789",
       totalEntries: 1456
     },
     {
       id: 2,
-      prize: "MacBook Pro",
-      winner: "S.L. from New York",
+      prize: "ماك بوك برو",
+      winner: "س.ل. من نيويورك",
       date: "2024-05-01",
       entryCode: "DRAW202405-****234",
       totalEntries: 1234
     },
     {
       id: 3,
-      prize: "$5,000 Cash",
-      winner: "A.R. from Texas",
+      prize: "٥٠٠٠ دولار نقداً",
+      winner: "أ.ر. من تكساس",
       date: "2024-04-01",
       entryCode: "DRAW202404-****567",
       totalEntries: 2100
@@ -33,48 +33,48 @@ const DrawHistory = () => {
   ];
 
   return (
-    <section className="py-16 bg-white/30 backdrop-blur-sm">
+    <section className="py-16 relative z-10">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Recent Winners
+          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-lg">
+            الفائزون الأخيرون
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Transparency is key to our platform. See our recent winners and their winning entries.
+          <p className="text-white/90 max-w-2xl mx-auto text-lg drop-shadow-md">
+            الشفافية هي مفتاح منصتنا. شاهد فائزينا الأخيرين ومشاركاتهم الفائزة.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {recentWinners.map((winner) => (
-            <Card key={winner.id} className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+            <Card key={winner.id} className="bg-white/20 backdrop-blur-md border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:bg-white/30 hover:-translate-y-2">
               <CardHeader className="text-center pb-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Trophy className="w-8 h-8 text-white" />
+                <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Trophy className="w-8 h-8 text-white drop-shadow-lg" />
                 </div>
-                <CardTitle className="text-xl font-bold text-gray-900">
+                <CardTitle className="text-xl font-bold text-white drop-shadow-md">
                   {winner.prize}
                 </CardTitle>
-                <Badge variant="secondary" className="bg-green-100 text-green-800">
+                <Badge className="bg-green-500/20 backdrop-blur-sm text-green-300 border border-green-400/30">
                   <Award className="w-3 h-3 mr-1" />
-                  Winner Verified
+                  فائز مؤكد
                 </Badge>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-white/80">
                   <User className="w-4 h-4 mr-2" />
                   <span>{winner.winner}</span>
                 </div>
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-sm text-white/80">
                   <Calendar className="w-4 h-4 mr-2" />
-                  <span>{new Date(winner.date).toLocaleDateString()}</span>
+                  <span>{new Date(winner.date).toLocaleDateString('ar-SA')}</span>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="text-xs text-gray-500 mb-1">Winning Entry Code</p>
-                  <p className="font-mono text-sm font-semibold">{winner.entryCode}</p>
+                <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                  <p className="text-xs text-white/60 mb-1">كود المشاركة الفائزة</p>
+                  <p className="font-mono text-sm font-semibold text-white">{winner.entryCode}</p>
                 </div>
                 <div className="text-center pt-2">
-                  <p className="text-xs text-gray-500">
-                    Total Entries: <span className="font-semibold">{winner.totalEntries.toLocaleString()}</span>
+                  <p className="text-xs text-white/60">
+                    إجمالي المشاركات: <span className="font-semibold text-white">{winner.totalEntries.toLocaleString('ar-SA')}</span>
                   </p>
                 </div>
               </CardContent>
@@ -83,8 +83,8 @@ const DrawHistory = () => {
         </div>
 
         <div className="text-center mt-8">
-          <button className="text-blue-600 hover:text-blue-800 font-semibold">
-            View Complete Draw History →
+          <button className="text-yellow-300 hover:text-yellow-200 font-semibold transition-colors drop-shadow-md">
+            عرض تاريخ السحوبات الكامل ←
           </button>
         </div>
       </div>

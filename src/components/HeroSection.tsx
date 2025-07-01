@@ -13,48 +13,39 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ currentPrize, nextDrawDate }) => {
   return (
     <section className="relative py-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 opacity-90"></div>
-      
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Badge */}
-          <Badge className="mb-6 bg-white/20 text-white border-white/30 hover:bg-white/30">
+          <Badge className="mb-6 bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 shadow-lg">
             <Star className="w-3 h-3 mr-1" />
-            Limited Time Offer
+            عرض لفترة محدودة
           </Badge>
 
           {/* Main heading */}
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Buy Premium Products,
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight drop-shadow-2xl">
+            اشتر منتجات مميزة،
             <br />
-            <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
-              Win Amazing Prizes
+            <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">
+              اربح جوائز مذهلة
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-            Every purchase automatically enters you into our monthly prize draw. 
-            This month's grand prize is a <span className="font-bold text-yellow-400">{currentPrize}</span>!
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto drop-shadow-lg">
+            كل عملية شراء تدخلك تلقائياً في سحب الجوائز الشهري. 
+            جائزة هذا الشهر الكبرى هي <span className="font-bold text-yellow-300">{currentPrize}</span>!
           </p>
 
           {/* Current prize highlight */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/20">
+          <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 mb-8 border border-white/30 shadow-2xl">
             <div className="flex items-center justify-center mb-4">
-              <Trophy className="w-8 h-8 text-yellow-400 mr-3" />
-              <h2 className="text-2xl font-bold">This Month's Grand Prize</h2>
+              <Trophy className="w-8 h-8 text-yellow-300 mr-3 drop-shadow-lg" />
+              <h2 className="text-2xl font-bold drop-shadow-lg">جائزة هذا الشهر الكبرى</h2>
             </div>
-            <p className="text-3xl font-bold text-yellow-400 mb-4">{currentPrize}</p>
+            <p className="text-3xl font-bold text-yellow-300 mb-4 drop-shadow-lg">{currentPrize}</p>
             <div className="text-lg">
-              <p className="mb-2">Draw Date: <CountdownTimer targetDate={nextDrawDate} /></p>
-              <p className="text-blue-200">Winner announced live on our platform</p>
+              <p className="mb-2">تاريخ السحب: <CountdownTimer targetDate={nextDrawDate} /></p>
+              <p className="text-white/80">سيتم الإعلان عن الفائز مباشرة على منصتنا</p>
             </div>
           </div>
 
@@ -62,38 +53,37 @@ const HeroSection: React.FC<HeroSectionProps> = ({ currentPrize, nextDrawDate })
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-8 py-4 text-lg shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 backdrop-blur-sm"
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
-              Shop Now & Enter Draw
+              تسوق الآن ادخل السحب
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold px-8 py-4 text-lg"
+              className="bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 font-semibold px-8 py-4 text-lg shadow-xl transition-all"
             >
               <Zap className="w-5 h-5 mr-2" />
-              How It Works
+              كيف يعمل
             </Button>
           </div>
 
           {/* Trust indicators */}
-          <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-blue-200">
-            <div className="flex items-center">
+          <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-white/80">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-              Legally Compliant
+              متوافق قانونياً
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-              Secure Payments
+              مدفوعات آمنة
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-              Fair & Transparent
+              عادل وشفاف
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-              No Purchase Required*
+              لا يتطلب شراء*
             </div>
           </div>
         </div>
