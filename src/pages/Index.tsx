@@ -63,7 +63,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 space-x-reverse">
               <img 
-                src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
+                src="/logo.png" 
                 alt="Yaa Khoodeh Draw" 
                 className="h-20 w-auto drop-shadow-lg"
               />
@@ -185,7 +185,7 @@ const Index = () => {
             <div>
               <div className="flex items-center space-x-2 space-x-reverse mb-4">
                 <img 
-                  src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
+                  src="/logo.png" 
                   alt="Yaa Khoodeh Draw" 
                   className="h-12 w-auto"
                 />
