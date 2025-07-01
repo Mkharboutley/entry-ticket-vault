@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -81,7 +80,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
                 alt="Yaa Khoodeh Draw" 
-                className="h-12 w-auto drop-shadow-lg"
+                className="h-20 w-auto drop-shadow-lg"
               />
             </div>
             <div className="flex items-center space-x-4 space-x-reverse">
@@ -188,7 +187,7 @@ const Index = () => {
                 <img 
                   src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
                   alt="Yaa Khoodeh Draw" 
-                  className="h-8 w-auto"
+                  className="h-12 w-auto"
                 />
               </div>
               <p className="text-white/70">
