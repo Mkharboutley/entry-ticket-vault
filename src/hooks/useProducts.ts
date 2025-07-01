@@ -1,6 +1,7 @@
 
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export interface Product {
   id: string;
@@ -17,14 +18,24 @@ export const useProducts = () => {
   return useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .eq('in_stock', true)
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      return data as Product[];
+      const productsRef = collection(db, 'products');
+      const q = query(
+        productsRef, 
+        where('in_stock', '==', true),
+        orderBy('created_at', 'desc')
+      );
+      
+      const querySnapshot = await getDocs(q);
+      const products: Product[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        products.push({
+          id: doc.id,
+          ...doc.data()
+        } as Product);
+      });
+      
+      return products;
     },
   });
 };

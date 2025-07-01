@@ -1,6 +1,7 @@
 
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
+import { collection, getDocs, query, where, orderBy, limit, doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export interface Draw {
   id: string;
@@ -21,15 +22,23 @@ export const useCurrentDraw = () => {
       const currentMonth = new Date().getMonth() + 1;
       const currentYear = new Date().getFullYear();
 
-      const { data, error } = await supabase
-        .from('draws')
-        .select('*')
-        .eq('month', currentMonth)
-        .eq('year', currentYear)
-        .single();
+      const drawsRef = collection(db, 'draws');
+      const q = query(
+        drawsRef,
+        where('month', '==', currentMonth),
+        where('year', '==', currentYear)
+      );
 
-      if (error) throw error;
-      return data as Draw;
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        throw new Error('No current draw found');
+      }
+
+      const doc = querySnapshot.docs[0];
+      return {
+        id: doc.id,
+        ...doc.data()
+      } as Draw;
     },
   });
 };
@@ -38,18 +47,37 @@ export const useRecentWinners = () => {
   return useQuery({
     queryKey: ['recent-winners'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('draws')
-        .select(`
-          *,
-          winner:auth.users!draws_winner_id_fkey(email)
-        `)
-        .eq('status', 'completed')
-        .order('draw_date', { ascending: false })
-        .limit(3);
+      const drawsRef = collection(db, 'draws');
+      const q = query(
+        drawsRef,
+        where('status', '==', 'completed'),
+        orderBy('draw_date', 'desc'),
+        limit(3)
+      );
 
-      if (error) throw error;
-      return data;
+      const querySnapshot = await getDocs(q);
+      const winners: any[] = [];
+
+      for (const drawDoc of querySnapshot.docs) {
+        const drawData = drawDoc.data();
+        let winner_email = 'Winner';
+        
+        if (drawData.winner_id) {
+          const userDoc = await getDoc(doc(db, 'users', drawData.winner_id));
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            winner_email = userData.email || 'Winner';
+          }
+        }
+
+        winners.push({
+          id: drawDoc.id,
+          ...drawData,
+          winner_email
+        });
+      }
+
+      return winners;
     },
   });
 };
