@@ -78,12 +78,11 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Trophy className="w-6 h-6 text-white" />
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-                Yaa Khoodeh Draw
-              </h1>
+              <img 
+                src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
+                alt="Yaa Khoodeh Draw" 
+                className="h-12 w-auto drop-shadow-lg"
+              />
             </div>
             <div className="flex items-center space-x-4 space-x-reverse">
               <Badge className="bg-white/20 backdrop-blur-sm text-white border-white/30">
@@ -186,10 +185,11 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 space-x-reverse mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Trophy className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-lg font-bold">Yaa Khoodeh Draw</h3>
+                <img 
+                  src="/lovable-uploads/13631dbf-cb1f-432c-a464-a8943323e181.png" 
+                  alt="Yaa Khoodeh Draw" 
+                  className="h-8 w-auto"
+                />
               </div>
               <p className="text-white/70">
                 المنصة الأكثر موثوقية لشراء المنتجات المميزة مع سحوبات جوائز مثيرة.
