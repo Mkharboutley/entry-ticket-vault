@@ -38,14 +38,14 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   }, [targetDate]);
 
   return (
-    <div className="flex items-center space-x-1">
-      <span className="font-mono font-bold">{timeLeft.days}d</span>
+    <div className="flex items-center space-x-1 space-x-reverse font-tajawal">
+      <span className="font-mono font-bold">{timeLeft.days}ي</span>
       <span className="text-sm">:</span>
-      <span className="font-mono font-bold">{timeLeft.hours.toString().padStart(2, '0')}h</span>
+      <span className="font-mono font-bold">{timeLeft.hours.toString().padStart(2, '0')}س</span>
       <span className="text-sm">:</span>
-      <span className="font-mono font-bold">{timeLeft.minutes.toString().padStart(2, '0')}m</span>
+      <span className="font-mono font-bold">{timeLeft.minutes.toString().padStart(2, '0')}د</span>
       <span className="text-sm">:</span>
-      <span className="font-mono font-bold">{timeLeft.seconds.toString().padStart(2, '0')}s</span>
+      <span className="font-mono font-bold">{timeLeft.seconds.toString().padStart(2, '0')}ث</span>
     </div>
   );
 };

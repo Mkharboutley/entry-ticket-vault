@@ -13,9 +13,9 @@ interface StatsCardProps {
 
 const StatsCard: React.FC<StatsCardProps> = ({ icon, title, value, description, className }) => {
   return (
-    <Card className={cn("border-2 hover:shadow-lg transition-all duration-300 hover:scale-105", className)}>
+    <Card className={cn("border-2 hover:shadow-lg transition-all duration-300 hover:scale-105 font-tajawal", className)}>
       <CardContent className="p-6">
-        <div className="flex items-center space-x-3 mb-3">
+        <div className="flex items-center space-x-3 space-x-reverse mb-3">
           <div className="p-2 rounded-lg bg-white/50">
             {icon}
           </div>

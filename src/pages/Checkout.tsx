@@ -27,7 +27,7 @@ const Checkout = () => {
   const cartItems = [
     {
       id: 1,
-      name: "Premium Water Bottle",
+      name: "زجاجة مياه مميزة",
       price: 15.99,
       quantity: 1,
       image: "/placeholder.svg"
@@ -53,8 +53,8 @@ const Checkout = () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     toast({
-      title: "Payment Successful!",
-      description: "You've been entered into this month's prize draw!",
+      title: "تم الدفع بنجاح!",
+      description: "لقد تم إدراجك في سحب الجوائز لهذا الشهر!",
       duration: 5000,
     });
 
@@ -62,15 +62,15 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-8 font-tajawal">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="flex items-center mb-8">
-          <Button variant="ghost" className="mr-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Shop
+          <Button variant="ghost" className="ml-4">
+            <ArrowLeft className="w-4 h-4 ml-2" />
+            العودة للمتجر
           </Button>
-          <h1 className="text-2xl font-bold text-gray-900">Secure Checkout</h1>
+          <h1 className="text-2xl font-bold text-gray-900">الدفع الآمن</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -81,15 +81,15 @@ const Checkout = () => {
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-blue-600 font-semibold">1</span>
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                      <span className="text-blue-600 font-semibold">١</span>
                     </div>
-                    Contact Information
+                    معلومات الاتصال
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email">البريد الإلكتروني</Label>
                     <Input
                       id="email"
                       name="email"
@@ -102,7 +102,7 @@ const Checkout = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName">الاسم الأول</Label>
                       <Input
                         id="firstName"
                         name="firstName"
@@ -112,7 +112,7 @@ const Checkout = () => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName">الاسم الأخير</Label>
                       <Input
                         id="lastName"
                         name="lastName"
@@ -129,15 +129,15 @@ const Checkout = () => {
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-blue-600 font-semibold">2</span>
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                      <span className="text-blue-600 font-semibold">٢</span>
                     </div>
-                    Shipping Address
+                    عنوان الشحن
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="address">Street Address</Label>
+                    <Label htmlFor="address">عنوان الشارع</Label>
                     <Input
                       id="address"
                       name="address"
@@ -148,7 +148,7 @@ const Checkout = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="city">City</Label>
+                      <Label htmlFor="city">المدينة</Label>
                       <Input
                         id="city"
                         name="city"
@@ -158,7 +158,7 @@ const Checkout = () => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="zipCode">ZIP Code</Label>
+                      <Label htmlFor="zipCode">الرمز البريدي</Label>
                       <Input
                         id="zipCode"
                         name="zipCode"
@@ -175,15 +175,15 @@ const Checkout = () => {
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-blue-600 font-semibold">3</span>
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                      <span className="text-blue-600 font-semibold">٣</span>
                     </div>
-                    Payment Information
+                    معلومات الدفع
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="cardNumber">Card Number</Label>
+                    <Label htmlFor="cardNumber">رقم البطاقة</Label>
                     <Input
                       id="cardNumber"
                       name="cardNumber"
@@ -195,7 +195,7 @@ const Checkout = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="expiryDate">Expiry Date</Label>
+                      <Label htmlFor="expiryDate">تاريخ الانتهاء</Label>
                       <Input
                         id="expiryDate"
                         name="expiryDate"
@@ -206,7 +206,7 @@ const Checkout = () => {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="cvv">CVV</Label>
+                      <Label htmlFor="cvv">رمز الأمان</Label>
                       <Input
                         id="cvv"
                         name="cvv"
@@ -228,13 +228,13 @@ const Checkout = () => {
               >
                 {isProcessing ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Processing Payment...
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white ml-2"></div>
+                    جاري معالجة الدفع...
                   </>
                 ) : (
                   <>
-                    <CreditCard className="w-5 h-5 mr-2" />
-                    Complete Purchase & Enter Draw
+                    <CreditCard className="w-5 h-5 ml-2" />
+                    إتمام الشراء والدخول في السحب
                   </>
                 )}
               </Button>
@@ -245,16 +245,16 @@ const Checkout = () => {
           <div className="lg:col-span-1">
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg sticky top-8">
               <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
+                <CardTitle>ملخص الطلب</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Items */}
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-3">
+                  <div key={item.id} className="flex items-center space-x-3 space-x-reverse">
                     <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover" />
                     <div className="flex-1">
                       <p className="font-semibold text-sm">{item.name}</p>
-                      <p className="text-gray-600 text-xs">Qty: {item.quantity}</p>
+                      <p className="text-gray-600 text-xs">الكمية: {item.quantity}</p>
                     </div>
                     <p className="font-semibold">${item.price}</p>
                   </div>
@@ -265,11 +265,11 @@ const Checkout = () => {
                 {/* Prize Entry Highlight */}
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
                   <div className="flex items-center mb-2">
-                    <Gift className="w-4 h-4 text-green-600 mr-2" />
-                    <span className="font-semibold text-green-800">Bonus Included</span>
+                    <Gift className="w-4 h-4 text-green-600 ml-2" />
+                    <span className="font-semibold text-green-800">مكافأة مضمنة</span>
                   </div>
                   <p className="text-sm text-green-700">
-                    🎉 Free entry into monthly Tesla Model 3 draw!
+                    🎉 مشاركة مجانية في سحب تسلا موديل ٣ الشهري!
                   </p>
                 </div>
 
@@ -278,15 +278,15 @@ const Checkout = () => {
                 {/* Totals */}
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Subtotal</span>
+                    <span>المجموع الفرعي</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Tax</span>
+                    <span>الضريبة</span>
                     <span>${tax.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between font-bold text-lg pt-2 border-t">
-                    <span>Total</span>
+                    <span>الإجمالي</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
@@ -294,12 +294,12 @@ const Checkout = () => {
                 {/* Security Badges */}
                 <div className="pt-4 space-y-2">
                   <div className="flex items-center text-sm text-gray-600">
-                    <Shield className="w-4 h-4 mr-2" />
-                    <span>Secure 256-bit SSL encryption</span>
+                    <Shield className="w-4 h-4 ml-2" />
+                    <span>تشفير آمن ٢٥٦ بت SSL</span>
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    <span>Money-back guarantee</span>
+                    <CheckCircle className="w-4 h-4 ml-2" />
+                    <span>ضمان استرداد الأموال</span>
                   </div>
                 </div>
               </CardContent>
