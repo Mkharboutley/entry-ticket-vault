@@ -10,6 +10,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   user: User | null;
