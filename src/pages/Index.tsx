@@ -9,59 +9,44 @@ import CountdownTimer from '@/components/CountdownTimer';
 import StatsCard from '@/components/StatsCard';
 import HeroSection from '@/components/HeroSection';
 import DrawHistory from '@/components/DrawHistory';
+import AuthModal from '@/components/AuthModal';
+import { useProducts } from '@/hooks/useProducts';
+import { useCurrentDraw } from '@/hooks/useDraws';
+import { useAuth } from '@/hooks/useAuth';
 
 const Index = () => {
   const { toast } = useToast();
-  const [totalEntries, setTotalEntries] = useState(1247);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const { data: products, isLoading: productsLoading } = useProducts();
+  const { data: currentDraw, isLoading: drawLoading } = useCurrentDraw();
+
   const [activePlayers, setActivePlayers] = useState(892);
-  const [currentPrize, setCurrentPrize] = useState("تسلا موديل ٣");
-
-  // Mock data for demonstration
-  const products = [
-    {
-      id: 1,
-      name: "زجاجة مياه مميزة",
-      price: 15.99,
-      originalPrice: 2.99,
-      image: "/placeholder.svg",
-      description: "مياه صافية من الينابيع الطبيعية في زجاجة مميزة",
-      inStock: true,
-      category: "beverages"
-    },
-    {
-      id: 2,
-      name: "مشروب الطاقة",
-      price: 12.99,
-      originalPrice: 3.99,
-      image: "/placeholder.svg",
-      description: "مشروب طاقة عالي الجودة بمكونات طبيعية",
-      inStock: true,
-      category: "beverages"
-    },
-    {
-      id: 3,
-      name: "قهوة حرفية",
-      price: 18.99,
-      originalPrice: 4.99,
-      image: "/placeholder.svg",
-      description: "حبوب قهوة مميزة من منشأ واحد",
-      inStock: true,
-      category: "beverages"
-    }
-  ];
-
-  const nextDrawDate = new Date();
-  nextDrawDate.setDate(nextDrawDate.getDate() + 15);
 
   useEffect(() => {
-    // Simulate real-time updates
+    // Simulate real-time updates for active players
     const interval = setInterval(() => {
-      setTotalEntries(prev => prev + Math.floor(Math.random() * 3));
       setActivePlayers(prev => prev + Math.floor(Math.random() * 2));
     }, 5000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleAuthAction = () => {
+    if (user) {
+      signOut();
+      toast({
+        title: "تم تسجيل الخروج",
+        description: "نراك قريباً!",
+      });
+    } else {
+      setAuthModalOpen(true);
+    }
+  };
+
+  const nextDrawDate = currentDraw ? new Date(currentDraw.draw_date) : new Date();
+  const currentPrize = currentDraw?.prize_name || "تسلا موديل ٣";
+  const totalEntries = currentDraw?.total_entries || 1247;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800 font-tajawal relative overflow-hidden">
@@ -88,8 +73,11 @@ const Index = () => {
                 <Users className="w-3 h-3 ml-1" />
                 {activePlayers} نشط
               </Badge>
-              <Button className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 transition-all duration-300">
-                لوحة التحكم
+              <Button 
+                onClick={handleAuthAction}
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 transition-all duration-300"
+              >
+                {user ? 'تسجيل الخروج' : 'تسجيل الدخول'}
               </Button>
               <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg backdrop-blur-sm">
                 <ShoppingCart className="w-4 h-4 ml-2" />
@@ -152,11 +140,23 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {productsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white/20 backdrop-blur-md rounded-2xl p-6 animate-pulse">
+                  <div className="h-48 bg-white/20 rounded-lg mb-4"></div>
+                  <div className="h-4 bg-white/20 rounded mb-2"></div>
+                  <div className="h-4 bg-white/20 rounded w-3/4"></div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products?.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
 
           {/* Legal Notice */}
           <div className="mt-12 bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/30 shadow-xl">
@@ -226,6 +226,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
     </div>
   );
 };

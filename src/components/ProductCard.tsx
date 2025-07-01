@@ -5,17 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ShoppingCart, Zap, Gift, Percent } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice: number;
-  image: string;
-  description: string;
-  inStock: boolean;
-  category: string;
-}
+import { useCreateOrder } from '@/hooks/useOrders';
+import { useAuth } from '@/hooks/useAuth';
+import { Product } from '@/hooks/useProducts';
 
 interface ProductCardProps {
   product: Product;
@@ -23,31 +15,45 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { toast } = useToast();
+  const { user } = useAuth();
+  const createOrderMutation = useCreateOrder();
   const [isAdding, setIsAdding] = useState(false);
 
   const handleAddToCart = async () => {
+    if (!user) {
+      toast({
+        title: "يرجى تسجيل الدخول",
+        description: "يجب تسجيل الدخول أولاً لإتمام عملية الشراء",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsAdding(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "تم الإضافة للسلة!",
-      description: `${product.name} تم إضافته. ستدخل في السحب الشهري!`,
-      duration: 3000,
-    });
-    
-    setIsAdding(false);
+    try {
+      await createOrderMutation.mutateAsync({
+        product_id: product.id,
+        quantity: 1,
+        price: product.price
+      });
+    } catch (error) {
+      console.error('Failed to create order:', error);
+    } finally {
+      setIsAdding(false);
+    }
   };
 
-  const discountPercentage = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+  const discountPercentage = product.original_price 
+    ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
+    : 0;
 
   return (
     <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 bg-white/20 backdrop-blur-md border border-white/30 shadow-xl hover:bg-white/30">
       <CardHeader className="p-0">
         <div className="relative overflow-hidden rounded-t-lg">
           <img 
-            src={product.image} 
+            src={product.image_url || '/placeholder.svg'} 
             alt={product.name}
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />
@@ -57,12 +63,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               دخول مجاني
             </Badge>
           </div>
-          <div className="absolute top-3 right-3">
-            <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg backdrop-blur-sm">
-              <Percent className="w-3 h-3 mr-1" />
-              خصم {discountPercentage}%
-            </Badge>
-          </div>
+          {discountPercentage > 0 && (
+            <div className="absolute top-3 right-3">
+              <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg backdrop-blur-sm">
+                <Percent className="w-3 h-3 mr-1" />
+                خصم {discountPercentage}%
+              </Badge>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </CardHeader>
@@ -74,7 +82,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           
           <div className="flex items-center space-x-2 mb-4">
             <span className="text-2xl font-bold text-yellow-300 drop-shadow-lg">${product.price}</span>
-            <span className="text-lg text-white/60 line-through">${product.originalPrice}</span>
+            {product.original_price && (
+              <span className="text-lg text-white/60 line-through">${product.original_price}</span>
+            )}
           </div>
         </div>
 
@@ -91,10 +101,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <Button 
           onClick={handleAddToCart}
-          disabled={!product.inStock || isAdding}
+          disabled={!product.in_stock || isAdding || createOrderMutation.isPending}
           className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm border border-white/20"
         >
-          {isAdding ? (
+          {isAdding || createOrderMutation.isPending ? (
             <>
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
               جاري الإضافة...
@@ -107,7 +117,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           )}
         </Button>
 
-        {!product.inStock && (
+        {!product.in_stock && (
           <p className="text-red-300 text-sm mt-2 text-center">نفدت الكمية</p>
         )}
       </CardContent>

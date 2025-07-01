@@ -121,6 +121,83 @@ export type Database = {
           },
         ]
       }
+      draw_entries: {
+        Row: {
+          created_at: string | null
+          draw_month: number
+          draw_year: number
+          entry_code: string
+          id: string
+          order_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          draw_month: number
+          draw_year: number
+          entry_code: string
+          id?: string
+          order_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          draw_month?: number
+          draw_year?: number
+          entry_code?: string
+          id?: string
+          order_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "draw_entries_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      draws: {
+        Row: {
+          created_at: string | null
+          draw_date: string
+          id: string
+          month: number
+          prize_name: string
+          status: string | null
+          total_entries: number | null
+          winner_id: string | null
+          winning_entry_code: string | null
+          year: number
+        }
+        Insert: {
+          created_at?: string | null
+          draw_date: string
+          id?: string
+          month: number
+          prize_name: string
+          status?: string | null
+          total_entries?: number | null
+          winner_id?: string | null
+          winning_entry_code?: string | null
+          year: number
+        }
+        Update: {
+          created_at?: string | null
+          draw_date?: string
+          id?: string
+          month?: number
+          prize_name?: string
+          status?: string | null
+          total_entries?: number | null
+          winner_id?: string | null
+          winning_entry_code?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
       logs: {
         Row: {
           action: string
@@ -162,6 +239,114 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      order_items: {
+        Row: {
+          created_at: string | null
+          id: string
+          order_id: string | null
+          price: number
+          product_id: string | null
+          quantity: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          order_id?: string | null
+          price: number
+          product_id?: string | null
+          quantity?: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          order_id?: string | null
+          price?: number
+          product_id?: string | null
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          id: string
+          status: string | null
+          total_amount: number
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          status?: string | null
+          total_amount: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          status?: string | null
+          total_amount?: number
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          in_stock: boolean | null
+          name: string
+          original_price: number | null
+          price: number
+          updated_at: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          in_stock?: boolean | null
+          name: string
+          original_price?: number | null
+          price: number
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          in_stock?: boolean | null
+          name?: string
+          original_price?: number | null
+          price?: number
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       tickets: {
         Row: {
@@ -288,6 +473,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_entry_code: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
       generate_qr_data: {
         Args: { profile_id: string }
         Returns: Json
