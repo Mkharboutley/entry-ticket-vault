@@ -15,8 +15,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ currentPrize, nextDrawDate })
     <section className="relative py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
-          {/* Badge with enhanced morphism */}
-          <Badge className="mb-6 bg-white/15 backdrop-blur-xl text-white border border-white/20 hover:bg-white/25 shadow-2xl transition-all duration-300">
+          {/* Badge */}
+          <Badge className="mb-6 bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30 shadow-lg">
             <Star className="w-3 h-3 mr-1" />
             عرض لفترة محدودة
           </Badge>
@@ -36,8 +36,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ currentPrize, nextDrawDate })
             جائزة هذا الشهر الكبرى هي <span className="font-bold text-yellow-300">{currentPrize}</span>!
           </p>
 
-          {/* Current prize highlight with enhanced morphism */}
-          <div className="bg-white/15 backdrop-blur-xl rounded-3xl p-8 mb-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+          {/* Current prize highlight */}
+          <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 mb-8 border border-white/30 shadow-2xl">
             <div className="flex items-center justify-center mb-4">
               <Trophy className="w-8 h-8 text-yellow-300 mr-3 drop-shadow-lg" />
               <h2 className="text-2xl font-bold drop-shadow-lg">جائزة هذا الشهر الكبرى</h2>
@@ -49,39 +49,39 @@ const HeroSection: React.FC<HeroSectionProps> = ({ currentPrize, nextDrawDate })
             </div>
           </div>
 
-          {/* CTA Buttons with enhanced morphism */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-8 py-4 text-lg shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 backdrop-blur-xl border border-white/10"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-semibold px-8 py-4 text-lg shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 backdrop-blur-sm"
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
               تسوق الآن ادخل السحب
             </Button>
             <Button 
               size="lg" 
-              className="bg-white/15 backdrop-blur-xl border border-white/20 text-white hover:bg-white/25 font-semibold px-8 py-4 text-lg shadow-2xl transition-all duration-300"
+              className="bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 font-semibold px-8 py-4 text-lg shadow-xl transition-all"
             >
               <Zap className="w-5 h-5 mr-2" />
               كيف يعمل
             </Button>
           </div>
 
-          {/* Trust indicators with enhanced morphism */}
+          {/* Trust indicators */}
           <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-white/80">
-            <div className="flex items-center backdrop-blur-xl bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-lg">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               متوافق قانونياً
             </div>
-            <div className="flex items-center backdrop-blur-xl bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-lg">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               مدفوعات آمنة
             </div>
-            <div className="flex items-center backdrop-blur-xl bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-lg">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               عادل وشفاف
             </div>
-            <div className="flex items-center backdrop-blur-xl bg-white/10 px-4 py-2 rounded-full border border-white/20 shadow-lg">
+            <div className="flex items-center backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
               لا يتطلب شراء*
             </div>

@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     : 0;
 
   return (
-    <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl hover:bg-white/20">
+    <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 bg-white/20 backdrop-blur-md border border-white/30 shadow-xl hover:bg-white/30">
       <CardHeader className="p-0">
         <div className="relative overflow-hidden rounded-t-lg">
           <img 
@@ -58,14 +58,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3">
-            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-2xl backdrop-blur-xl border border-white/20">
+            <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg backdrop-blur-sm">
               <Gift className="w-3 h-3 mr-1" />
               دخول مجاني
             </Badge>
           </div>
           {discountPercentage > 0 && (
             <div className="absolute top-3 right-3">
-              <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-2xl backdrop-blur-xl border border-white/20">
+              <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg backdrop-blur-sm">
                 <Percent className="w-3 h-3 mr-1" />
                 خصم {discountPercentage}%
               </Badge>
@@ -77,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       
       <CardContent className="p-6">
         <div className="mb-4">
-          <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{product.name}</h3>
+          <h3 className="text-xl font-bold text-white mb-2 drop-shadow-md">{product.name}</h3>
           <p className="text-white/80 text-sm mb-3">{product.description}</p>
           
           <div className="flex items-center space-x-2 mb-4">
@@ -88,8 +88,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
 
-        {/* Prize entry highlight with enhanced morphism */}
-        <div className="bg-white/15 backdrop-blur-xl rounded-xl p-4 mb-4 border border-white/20 shadow-2xl">
+        {/* Prize entry highlight */}
+        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 mb-4 border border-white/30 shadow-lg">
           <div className="flex items-center mb-2">
             <Zap className="w-4 h-4 text-yellow-300 mr-2" />
             <span className="text-sm font-semibold text-yellow-300">دخول مكافأة في السحب</span>
@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Button 
           onClick={handleAddToCart}
           disabled={!product.in_stock || isAdding || createOrderMutation.isPending}
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 shadow-2xl hover:shadow-3xl transition-all backdrop-blur-xl border border-white/10"
+          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm border border-white/20"
         >
           {isAdding || createOrderMutation.isPending ? (
             <>
