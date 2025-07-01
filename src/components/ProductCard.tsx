@@ -7,7 +7,9 @@ import { ShoppingCart, Zap, Gift, Percent } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useCreateOrder } from '@/hooks/useOrders';
 import { useAuth } from '@/hooks/useAuth';
+import { useCurrency } from '@/hooks/useCurrency';
 import { Product } from '@/hooks/useProducts';
+import WishlistButton from './WishlistButton';
 
 interface ProductCardProps {
   product: Product;
@@ -16,6 +18,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { toast } = useToast();
   const { user } = useAuth();
+  const { convertPrice } = useCurrency();
   const createOrderMutation = useCreateOrder();
   const [isAdding, setIsAdding] = useState(false);
 
@@ -57,11 +60,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt={product.name}
             className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
           />
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-3 left-3 flex space-x-2">
             <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg backdrop-blur-sm">
               <Gift className="w-3 h-3 mr-1" />
               دخول مجاني
             </Badge>
+            <WishlistButton productId={product.id} productName={product.name} />
           </div>
           {discountPercentage > 0 && (
             <div className="absolute top-3 right-3">
@@ -81,9 +85,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <p className="text-white/80 text-sm mb-3">{product.description}</p>
           
           <div className="flex items-center space-x-2 mb-4">
-            <span className="text-2xl font-bold text-yellow-300 drop-shadow-lg">${product.price}</span>
+            <span className="text-2xl font-bold text-yellow-300 drop-shadow-lg">
+              {convertPrice(product.price)}
+            </span>
             {product.original_price && (
-              <span className="text-lg text-white/60 line-through">${product.original_price}</span>
+              <span className="text-lg text-white/60 line-through">
+                {convertPrice(product.original_price)}
+              </span>
             )}
           </div>
         </div>
