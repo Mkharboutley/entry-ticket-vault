@@ -13,6 +13,7 @@ import AuthModal from '@/components/AuthModal';
 import { useProducts } from '@/hooks/useProducts';
 import { useCurrentDraw } from '@/hooks/useDraws';
 import { useAuth } from '@/hooks/useAuth';
+import TicketCard from '@/components/TicketCard';
 
 const Index = () => {
   const { toast } = useToast();
@@ -153,7 +154,7 @@ const Index = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {products?.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <TicketCard key={product.id} product={product} />
               ))}
             </div>
           )}
