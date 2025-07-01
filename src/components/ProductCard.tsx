@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             </Badge>
           </div>
           <div className="absolute top-3 right-3">
-            <Badge className="bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg backdrop-blur-sm">
+            <Badge className="bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg backdrop-blur-sm">
               <Percent className="w-3 h-3 mr-1" />
               خصم {discountPercentage}%
             </Badge>
@@ -92,7 +92,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <Button 
           onClick={handleAddToCart}
           disabled={!product.inStock || isAdding}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm border border-white/20"
+          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 shadow-xl hover:shadow-2xl transition-all backdrop-blur-sm border border-white/20"
         >
           {isAdding ? (
             <>
